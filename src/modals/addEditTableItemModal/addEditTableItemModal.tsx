@@ -73,7 +73,13 @@ export function AddEditTableItemModal(props: Props) {
           <h3 className="modalName">
             {props.actionType === 'AddNewItemToTable' ? 'Новый элемент' : 'Редактирование элемента'}
           </h3>
-          <button className="closeModal" onClick={() => props.handleCloseModal()}>
+          <button
+            className="closeModal"
+            onClick={(e) => {
+              e.stopPropagation();
+              props.handleCloseModal();
+            }}
+          >
             <CloseCircleOutlined style={{ color: 'white', fontSize: '26px' }} />
           </button>
         </div>
