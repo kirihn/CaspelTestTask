@@ -1,11 +1,12 @@
 import { useForm } from 'react-hook-form';
 import { Props } from './types';
-import { TableItem } from '../../types/tableItem';
+import { TableItem, TableItemForForm } from '../../types/tableItem';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { tableItemSchema } from 'yup/tableItemSchema.yup';
 import './addEditTableItemModal.scss';
 import { CloseCircleOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
+import { getStringDateByDateObj } from 'func/getStingDateByDateObj';
 
 export function AddEditTableItemModal(props: Props) {
   const [shake, setShake] = useState(false);
@@ -15,27 +16,29 @@ export function AddEditTableItemModal(props: Props) {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<Omit<TableItem, 'id'>>({
+  } = useForm<Omit<TableItemForForm, 'id'>>({
     resolver: yupResolver(tableItemSchema),
     defaultValues: props.oldItem
       ? {
           name: props.oldItem.name,
           value: props.oldItem.value,
-          date: props.oldItem.date,
+          date: getStringDateByDateObj(props.oldItem.date),
         }
       : undefined,
   });
 
-  const onSubmit = (data: Omit<TableItem, 'id'>) => {
+  const onSubmit = (data: Omit<TableItemForForm, 'id'>) => {
     if (props.actionType === 'AddNewItemToTable') {
       const item: TableItem = {
         ...data,
+        date: new Date(data.date),
         id: crypto.randomUUID(),
       };
       props.setDataFromModal(item);
     } else if (props.actionType === 'EditItemInTable') {
       const item: TableItem = {
         ...data,
+        date: new Date(data.date),
         id: '',
       };
       props.setDataFromModal(item);
