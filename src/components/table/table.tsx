@@ -1,5 +1,5 @@
 import { getRandomTableData } from '../../func/getRandomTableData';
-import { Button, Table as TableAntd } from 'antd';
+import { Button, Input, Table as TableAntd } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useEffect, useState } from 'react';
 import { TableItem } from '../../types/tableItem';
@@ -9,19 +9,16 @@ import { useModal } from 'hooks/useModal';
 import { AddEditTableItemModal } from 'modals/addEditTableItemModal/addEditTableItemModal';
 
 export function Table() {
-  const [tableData, setTableData] = useState<TableItem[]>(getRandomTableData(5));
+  const [tableData, setTableData] = useState<TableItem[]>(getRandomTableData(8));
   const [choiseItemId, setChoiseItemId] = useState<string | null>();
   const [choiseItem, setChoiseItem] = useState<TableItem | null>();
   const [dataFromModal, setDataFromModal] = useState<TableItem | null>();
+  const [searchText, setSearchText] = useState<string>('');
+  const [filteredTableData, setFilteredTableData] = useState<TableItem[]>();
 
   const { switchModal, handleSwitchModal, handleCloseModal } = useModal();
 
   const columns: ColumnsType<TableItem> = [
-    {
-      title: 'Id',
-      dataIndex: 'id',
-      key: 'id',
-    },
     {
       title: 'Имя',
       dataIndex: 'name',
@@ -73,6 +70,31 @@ export function Table() {
   };
 
   useEffect(() => {
+    if (searchText.length === 0) {
+      setFilteredTableData(tableData);
+    } else {
+      setFilteredTableData(
+        tableData.filter((item) => {
+          console.log(item.date.toDateString());
+          if (
+            item.name.toLowerCase().includes(searchText.toLocaleLowerCase().trim()) ||
+            item.value.toString().toLowerCase().includes(searchText.toLocaleLowerCase().trim()) ||
+            item.date
+              .toDateString()
+              .toLowerCase()
+              .includes(searchText.toLocaleLowerCase().trim()) ||
+            item.date.toISOString().toLowerCase().includes(searchText.toLocaleLowerCase().trim()) ||
+            item.date
+              .toLocaleDateString()
+              .toLowerCase()
+              .includes(searchText.toLocaleLowerCase().trim())
+          )
+            return item;
+        }),
+      );
+    }
+  }, [searchText, tableData]);
+  useEffect(() => {
     if (!dataFromModal) return;
 
     if (dataFromModal.id) {
@@ -96,6 +118,12 @@ export function Table() {
   return (
     <div className="tablePage">
       <div className="tableParamsContainer">
+        <Input
+          className="searchInput"
+          placeholder="Введите текст"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+        />
         <Button
           type="primary"
           shape="round"
@@ -109,7 +137,7 @@ export function Table() {
         <TableAntd
           className="table"
           columns={columns}
-          dataSource={tableData}
+          dataSource={filteredTableData}
           rowKey="id"
           scroll={{ y: '60vh' }}
           pagination={false}

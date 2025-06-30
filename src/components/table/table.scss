@@ -11,6 +11,11 @@
         border-radius: 10px;
         display: flex;
         justify-content: center;
+
+        .searchInput{
+            max-width: 400px;
+            margin-right: 10px;
+        }
     }
 
     .tableContainer{
