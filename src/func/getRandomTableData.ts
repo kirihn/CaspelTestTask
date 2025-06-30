@@ -1,10 +1,10 @@
-import { DataItem } from '../components/table/types';
+import { TableItem } from '../types/tableItem';
 
-export function getRandomTableData(count: number): DataItem[] {
-  const DataItems: DataItem[] = [];
+export function getRandomTableData(count: number): TableItem[] {
+  const TableItems: TableItem[] = [];
 
   for (let i = 1; i <= count; i++) {
-    DataItems.push({
+    TableItems.push({
       id: crypto.randomUUID(),
       name: 'item ' + i,
       date: getRandomDate(new Date('2025-01-01'), new Date('2025-06-030')),
@@ -12,7 +12,7 @@ export function getRandomTableData(count: number): DataItem[] {
     });
   }
 
-  return DataItems;
+  return TableItems;
 }
 
 function getRandomDate(dateStart: Date, dateEnd: Date): Date {

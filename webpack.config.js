@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin').TsconfigPathsPlugin;
 
 module.exports = {
   entry: './src/index.tsx',
@@ -12,6 +13,11 @@ module.exports = {
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
+    plugins: [
+      new TsconfigPathsPlugin({
+        configFile: path.resolve(__dirname, './tsconfig.json'),
+      }),
+    ],
   },
   devServer: {
     static: './dist',
@@ -30,6 +36,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({ template: 'public/index.html' }),
+
     new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
   ],
   mode: 'development',

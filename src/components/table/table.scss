@@ -24,6 +24,11 @@
                 border: none;
                 padding: 5px;
                 cursor: pointer;
+
+                &:hover{
+                    background: rgba(0, 0, 0, 0.096);
+                    border-radius: 5px;
+                }
             }
         }
     }
