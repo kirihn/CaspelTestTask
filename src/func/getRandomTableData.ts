@@ -7,7 +7,7 @@ export function getRandomTableData(count: number): TableItem[] {
     TableItems.push({
       id: crypto.randomUUID(),
       name: 'item ' + i,
-      date: getRandomDate(new Date('2025-01-01'), new Date('2025-06-030')),
+      date: getRandomDate(new Date('2025-01-30T00:00:00'), new Date('2024-01-30T00:00:00')),
       value: Math.floor(Math.random() * 100),
     });
   }
