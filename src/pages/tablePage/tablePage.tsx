@@ -1,3 +1,4 @@
+import { Table } from '../../components/table/table';
 import './tablePage.scss';
 
 export function TablePage() {
@@ -5,7 +6,7 @@ export function TablePage() {
     <div className="tablePage">
       <div className="tableParamsContainer">ssssssssssssssss ssssssas</div>
       <div className="tebleContainer">
-        
+        <Table></Table>
       </div>
     </div>
   );
