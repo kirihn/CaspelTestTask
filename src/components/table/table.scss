@@ -1,0 +1,29 @@
+.tablePage{
+    padding: 20px;
+    margin: 20px;
+    border: 0.1px solid #5e5e5e;
+    border-radius: 20px;
+    width: 100%;
+    .tableParamsContainer{
+        border: 0.1px solid #5e5e5e;
+        padding: 15px;
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .tableContainer{
+
+        .table{
+            max-height: '50vh';
+            overflow-y: auto;
+
+            .actionRow{
+                background: none;
+                border: none;
+                padding: 5px;
+                cursor: pointer;
+            }
+        }
+    }
+}

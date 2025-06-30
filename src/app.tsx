@@ -1,5 +1,5 @@
 import './app.scss';
-import { TablePage } from './pages/tablePage/tablePage';
+import { Table } from './components/table/table';
 import { Layout } from 'antd';
 
 export function App() {
@@ -8,11 +8,11 @@ export function App() {
   return (
     <Layout style={{ height: '100%', width: '100%' }}>
       <Header>
-        <h1 className="logo">CASPEL</h1>
+        <h1 className="logo">CASPEL TEST TASK</h1>
       </Header>
       <Layout style={{ height: '100%', width: '100%' }}>
         <Content className="mainContainer">
-          <TablePage></TablePage>
+          <Table/>
         </Content>
       </Layout>
     </Layout>
