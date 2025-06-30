@@ -29,7 +29,7 @@ export function Table() {
       title: 'Дата',
       dataIndex: 'date',
       key: 'date',
-      render: (date: Date) => date.toLocaleString(),
+      render: (date: Date) => date.toLocaleDateString(),
       sorter: (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
     },
     {
@@ -79,11 +79,6 @@ export function Table() {
           if (
             item.name.toLowerCase().includes(searchText.toLocaleLowerCase().trim()) ||
             item.value.toString().toLowerCase().includes(searchText.toLocaleLowerCase().trim()) ||
-            item.date
-              .toDateString()
-              .toLowerCase()
-              .includes(searchText.toLocaleLowerCase().trim()) ||
-            item.date.toISOString().toLowerCase().includes(searchText.toLocaleLowerCase().trim()) ||
             item.date
               .toLocaleDateString()
               .toLowerCase()
