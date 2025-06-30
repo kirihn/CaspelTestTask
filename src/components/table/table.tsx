@@ -49,7 +49,7 @@ export function Table() {
           <button className="actionRow" onClick={() => handleEditTableItem(record.id)}>
             <EditTwoTone style={{ fontSize: '24px' }} />
           </button>
-          <button className="actionRow" onClick={() => alert(`Удалить ${record.id}`)}>
+          <button className="actionRow" onClick={() => handleDeleteItem(record.id)}>
             <DeleteTwoTone twoToneColor="#52ca52" style={{ fontSize: '24px' }} />
           </button>
         </>
@@ -66,6 +66,10 @@ export function Table() {
     setChoiseItemId(itemId);
     setChoiseItem(tableData.find((item) => item.id === itemId));
     handleSwitchModal('EditItemInTable');
+  };
+
+  const handleDeleteItem = (itemIdToDelete: string) => {
+    setTableData((prev) => prev.filter((item) => item.id != itemIdToDelete));
   };
 
   useEffect(() => {
